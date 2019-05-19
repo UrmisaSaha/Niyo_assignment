@@ -8,6 +8,6 @@ public class NiyoController {
 
 	@RequestMapping("/")
 	public String signupPage() {
-		return "login";
+		return "signup";
 	}
 }
