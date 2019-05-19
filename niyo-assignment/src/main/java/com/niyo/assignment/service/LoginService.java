@@ -32,17 +32,18 @@ public class LoginService {
 	}
 	
 	public UserDetails getUserDetails(LoginDetail login) {
-		/*UserDetails user = new UserDetails();
+		UserDetails user = new UserDetails();
 		if(validateLogin(login)) {
 			Optional<UserDbDetails> dbUserDetail = userDetailRepository.findById(login.getEmailId());
 			user.setUsername(login.getEmailId());
-			user.setFirstName(dbUserDetail.get().getFirstName());
-			user.setLastName(dbUserDetail.get().getLastName());
-			user.setGender(dbUserDetail.get().getGender());
-			user.setPhoneNumber(dbUserDetail.get().getPhoneNumber());
-			user.setDateOfBirth(dbUserDetail.get().getDateOfBirth());
+			UserDbDetails userDetails = dbUserDetail.get();
+			user.setFirstName(userDetails.getFirstName());
+			user.setLastName(userDetails.getLastName());
+			user.setGender(userDetails.getGender());
+			user.setPhoneNumber(userDetails.getPhoneNumber());
+			user.setDateOfBirth(userDetails.getDateOfBirth());
 		return user;
-		}*/
+		}
 		return null;
 	}
 }

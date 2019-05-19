@@ -8,13 +8,19 @@ import javax.persistence.Table;
 @Table(name = "user_details")
 public class UserDbDetails {
 	@Id
+	String userId;
 	String firstName;
 	String lastName;
 	String phoneNumber;
 	String dateOfBirth;
 	String gender;
 	
-	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

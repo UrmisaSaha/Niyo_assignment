@@ -2,6 +2,7 @@ package com.niyo.assignment.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class NiyoRestController {
 	@Autowired
 	SignUpService signUpService;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST, headers = "Content-Type = application/x-www-form-urlencoded")
-	public Response<UserDetails> login(LoginDetail login) {
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Response<UserDetails> login(@RequestBody LoginDetail login) {
 		Response<UserDetails> resp = new Response<UserDetails>();
 		UserDetails userDetails = loginService.getUserDetails(login);
 		if(userDetails == null) {
@@ -35,12 +36,12 @@ public class NiyoRestController {
 		return resp;
 	}
 	
-	@RequestMapping(value = "/new_user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public Response<String> signup(SignUpDetails signup) {
-		signUpService.signup(signup);
-		Response<String> resp = new Response<String>();
+	@RequestMapping(value = "/new_user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Response<UserDetails> signup(@RequestBody SignUpDetails signup) {
+		UserDetails serviceResp = signUpService.signup(signup);
+		Response<UserDetails> resp = new Response<UserDetails>();
 		resp.setMessage("User sign up successful.");
-		resp.setPayload("Created user successfully.");
+		resp.setPayload(serviceResp);
 		return resp;
 	}
 

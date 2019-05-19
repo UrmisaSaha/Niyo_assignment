@@ -4,6 +4,12 @@ public class LoginDetail {
 	String emailId;
 	String password;
 	
+	public LoginDetail() {};
+	public LoginDetail(String emailId, String password) {
+		this.emailId = emailId;
+		this.password = password;
+	}
+	
 	public String getEmailId() {
 		return emailId;
 	}
