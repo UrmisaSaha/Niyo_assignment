@@ -1,10 +1,11 @@
 package com.niyo.assignment.model;
 
-public class SignUpDetails {
-	String firstName;
-	String lastName;
-	String phoneNumber;
-	String dateOfBirth;
-	String gender;
-
+public class SignUpDetails extends UserDetails{
+	String password;
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
