@@ -2,6 +2,8 @@ package com.niyo.assignment.model;
 
 public class LoginDetail {
 	String emailId;
+	String password;
+	
 	public String getEmailId() {
 		return emailId;
 	}
@@ -14,6 +16,5 @@ public class LoginDetail {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	String password;
 	
 }

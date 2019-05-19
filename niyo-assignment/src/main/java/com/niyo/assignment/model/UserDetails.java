@@ -1,12 +1,12 @@
 package com.niyo.assignment.model;
 
 public class UserDetails {
-	String username;
-	String firstName;
-	String lastName;
-	String phoneNumber;
-	String dateOfBirth;
-	String gender;
+	protected String username;
+	protected String firstName;
+	protected String lastName;
+	protected String phoneNumber;
+	protected String dateOfBirth;
+	protected String gender;
 
 	public String getUsername() {
 		return username;
