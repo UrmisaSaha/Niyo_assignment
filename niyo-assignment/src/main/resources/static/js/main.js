@@ -1,13 +1,67 @@
-	
+var res;
+
 function loadLogin(){
+	var cplab = generateEquationCaptcha();
+	var image = generateImageCaptcha();
 	var mainDiv = document.getElementById('MainDiv');
 	mainDiv.innerHTML = 'Email Id: <input type="text" id="emailId"><br>'+
 						'Password: <input type="password" id="password"><br>'+
+						'<label id="cptcha">'+cplab+'</label>'+
+						'<input type="text" id="cptchaVal">'+
+						'<label id="wrcptcha"></label><br>'+
+						'<img id="imgcptcha" src="images/'+image+'" height="40px" width="90px">'+
+						'<input type="text" id="imgcaptchaval">'+
+						'<label id="wrimagecaptcha"></label><br>'+
 						'<input type="button" value="Log In" onclick="login()">';
 						
 }
 
+function generateEquationCaptcha(){
+	var a = Math.floor((Math.random() * 100) + 1);
+	var b = Math.floor((Math.random() * 100) + 1);
+	var op = Math.floor((Math.random() * 2) + 1);
+	var cplab;
+	if(op == 1){//subtraction
+		if(a < b){
+			let t = a;
+			a = b;
+			b = t;
+		}
+		res = a - b;
+		cplab = a+'-'+b+'=';
+	}
+	else {
+		cplab = a+'+'+b+'=';
+		res = a + b;
+	}
+	return cplab;
+}
+
+function generateImageCaptcha(){
+	var image = Math.floor((Math.random() * 3) + 1);
+	return 'CaptchaImage'+image+'.png';
+}
+
 function login(){
+	var cpres = parseInt(document.getElementById("cptchaVal").value);
+	var imgcaptcha = document.getElementById("imgcptcha").src.substring(41,42);
+	var imgcptchaval = document.getElementById("imgcaptchaval").value;
+	if(cpres != res){
+		document.getElementById("wrcptcha").innerHTML = 'Wrong captcha answer.';
+		return;
+	}
+	else{
+		document.getElementById("wrcptcha").innerHTML = '';
+	}
+	
+	if(imgcptchaval != getImgCaptchaVal(imgcaptcha)){
+		document.getElementById("wrimagecaptcha").innerHTML = 'Wrong captcha answer.';
+		return;
+	}
+	else{
+		document.getElementById("wrimagecaptcha").innerHTML = '';
+	}
+	
 	var emailId = document.getElementById("emailId").value;
 	var password = document.getElementById("password").value;
 	var xmlhttpRequest = new XMLHttpRequest();
@@ -19,6 +73,11 @@ function login(){
 			putUserData(JSON.parse(this.responseText), 'Login');
 		}
 	};
+}
+
+function getImgCaptchaVal(image){
+	var values = ['TgF42K','18','i2Mon'];
+	return values[parseInt(image)-1];
 }
 
 function signup(){
